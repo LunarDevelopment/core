@@ -1,7 +1,13 @@
 <?php
-/**
- * @license see LICENSE
+/**************************************************************************
+ * Copyright (C) Lewis Dimmick, All Rights Reserved
+ *
+ * @file        SearchEngineResponse.php
+ * @author      Lewis Dimmick
+ * @project     ToDo
+ * @date        21/09/2020
  */
+
 
 namespace Serps\Core\Http;
 
@@ -109,6 +115,7 @@ class SearchEngineResponse
      */
     public function getPageContent()
     {
+        $this->pageContent = preg_replace('/^.*?(<body)/is','$1', $this->pageContent);
         return $this->pageContent;
     }
 
@@ -137,5 +144,18 @@ class SearchEngineResponse
     public function getProxy()
     {
         return $this->proxy;
+    }
+
+    /*
+    * Probably redundant.
+    */
+    static public function __callStatic($method, $args)
+    {
+        throw new \Exception("$method is not defined");
+    }
+
+    public function __call($method, $args)
+    {
+        throw new \Exception("$method is not defined");
     }
 }
